@@ -14,8 +14,12 @@ RUN yum install -y puppet \
     rsync \
     python-pip
 
+RUN mkdir -p /mrepo/srcdir
+RUN mkdir -p /mrepo/wwwdir
 RUN puppet module install puppetlabs-mrepo
-RUN puppet apply /etc/puppet/modules/mrepo/tests/init.pp --verbose
+ADD conf/init.pp /tmp/init.pp
+RUN puppet apply /tmp/init.pp --verbose
+RUN chown -R apache:apache /mrepo
 RUN echo 'set dns:order "inet inet6"' >> /etc/lftp.conf
 
 ADD conf/mrepo.conf /etc/mrepo.conf 

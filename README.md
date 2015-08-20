@@ -1,6 +1,6 @@
-# PuppetDB 
+# MREPO
 
-Run a PuppetDB Server out of docker
+Mirror or Serve Package Repos 
 
 ## requirements and assumptions
 This container has a couple of assumptions and requirements. 
@@ -14,6 +14,7 @@ To test against another container you can link the two containers. To Run a pupp
 ```Shell
 docker run -it -d -h puppet --name puppet -h puppet tfhartmann/puppetserver
 ```
+
 Then Link PuppetDB to the master:
 ```Shell
 docker run --link puppet:puppet -P -it -d tfhartmann/puppetdb
@@ -21,15 +22,15 @@ docker run --link puppet:puppet -P -it -d tfhartmann/puppetdb
 
 ## Examples
 
-
-
-#### `Run PuppetDB`
+#### `Clone Repos`
 
 
 docker run --link puppet:puppet  -it --rm tfhartmann/puppetdb
 
 
 docker run --link puppet:puppet -P -it -d tfhartmann/puppetdb
+
+#### `Serve Repos with Apache`
 
 ##  environment variables 
 ### `DBHOST`
