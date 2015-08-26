@@ -15,8 +15,7 @@ RUN yum install -y puppet \
     python-pip
 
 RUN mkdir -p /etc/mrepo.conf.d
-RUN mkdir -p /mrepo/srcdir
-RUN mkdir -p /mrepo/wwwdir
+RUN mkdir -p /mrepo/www
 RUN puppet module install puppetlabs-mrepo
 ADD conf/init.pp /tmp/init.pp
 RUN puppet apply /tmp/init.pp --verbose
@@ -25,9 +24,9 @@ RUN echo 'set dns:order "inet inet6"' >> /etc/lftp.conf
 
 ADD conf/mrepo.conf /etc/mrepo.conf 
 ADD conf/repos.conf /etc/mrepo.conf.d/repos.conf 
-# ADD scripts/start_puppetdb.sh /tmp/start_puppetdb.sh
-# Run PuppetDB
-#CMD [ "/tmp/start_puppetdb.sh" ]
+ADD scripts/run-mrepo.sh /tmp/run-mrepo.sh
+# Run MRepo and/or apache
+CMD [ "/tmp/run-mrepo.sh" ]
 
 # Expose Web ports
 EXPOSE 80

@@ -1,6 +1,6 @@
 # MREPO
 
-Mirror or Serve Package Repos 
+Mirror and Serve Package Repos 
 
 ## requirements and assumptions
 This container has a couple of assumptions and requirements. 
@@ -22,7 +22,7 @@ docker run --link puppet:puppet -P -it -d tfhartmann/puppetdb
 
 ## Examples
 
-#### `Clone Repos`
+#### `Mirror Repos`
 
 
 docker run --link puppet:puppet  -it --rm tfhartmann/puppetdb
@@ -33,9 +33,11 @@ docker run --link puppet:puppet -P -it -d tfhartmann/puppetdb
 #### `Serve Repos with Apache`
 
 ##  environment variables 
-### `DBHOST`
-You ***MUST** Pass a DB host into the container, otherwise puppetdb will have no idea what to connect to as it doesn't run a local db.
+### `WEB`
+Passing any value to the WEB variable will start apache, in a typical run you might pass `-e WEB=true`
+This would start apache **after** mrepo runs, and will continue to serve the /mrepo/wwwdir until the container stops
 
+### `FROZEN`
 
 ### `DBUSER`
 The Postgres user that has access to the puppetdb database on your postgres server.
