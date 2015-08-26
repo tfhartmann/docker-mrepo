@@ -1,22 +1,32 @@
 #!/bin/bash
 
-: ${DBHOST:=puppetdbopen.cpmpxebkd7tp.us-east-1.rds.amazonaws.com}
-#: ${DBHOST:=$PUPPET_PORT_8140_TCP_ADDR}
-: ${DBUSER:=puppetdb}
-: ${DBPASS:=puppetdb}
-# SSL Doesn't actually work yet
-: ${SSL:=true}
-: ${PUPPETHOST:=$PUPPET_PORT_8140_TCP_ADDR}
-
+: ${UPDATE:=True}
 : ${WEB}
 
-rm -rf /var/run/httpd/* /tmp/httpd*
 
-/usr/bin/mrepo -guvv
+# Step1 Update the Repos - Defaults to 'True'
+if [ ${UPDATE} == 'True' ]; then
+    /usr/bin/mrepo -guvv
+fi
+
+# Create frozen repos
+if [ ${FROZEN} ]; then
+    if [ ! -d /mrepo/${FROZEN}/frozen ]; then
+        mkdir /mrepo/${FROZEN}/frozen
+    fi
+
+    cd /mrepo/${FROZEN}
+    REPOS=$(/bin/ls | /bin/grep -v frozen)
+    rm frozen/*
+    for RPM in $(find ${REPOS}/ -iname *.rpm) ; do
+        ln ${RPM} frozen/${RPM##*/};
+    done
+    /usr/bin/mrepo -gv
+fi
 
 # run that web server!
-if [ ${WEB} ]
-    then
-        echo 'Starting Apache...'
-        exec /usr/sbin/apachectl -D FOREGROUND
+if [ ${WEB} ]; then
+    rm -rf /var/run/httpd/* /tmp/httpd*
+    echo 'Starting Apache...'
+    exec /usr/sbin/apachectl -D FOREGROUND
 fi
