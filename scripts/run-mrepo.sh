@@ -6,7 +6,7 @@
 
 # Step1 Update the Repos - Defaults to 'True'
 if [ ${UPDATE} == 'True' ]; then
-    /usr/bin/mrepo -guvv
+    /usr/bin/mrepo -gu
 fi
 
 # Create frozen repos
