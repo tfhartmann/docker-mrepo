@@ -2,17 +2,6 @@
 
 Mirror and Serve Package Repos
 
-## requirements and assumptions
-This container has a couple of assumptions and requirements.
-
-* You need a Postgres Server running.  This server can be another container, a RDS end point or a physical DB somewhere
-* Puppet Master server running. The Puppetlabs/puppetdb module uses ssl certs created during your nodes inital puppet runs so you will
-  need at least a token puppet master running that the container(s) can connect to to initialze the certs.
-
-
-
-## Examples
-
 #### `Mirror Repos`
 
 
