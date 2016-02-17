@@ -15,6 +15,8 @@ Mirror Repos onto a shared file system - This allows your repos to persist after
 
 `docker run -it --rm -v /nfs/filesystem/repo:/mrepo tfhartmann/mrepo `
 
+Mirror just one repo (for any dist it exists in)
+`docker run -it --rm -v -e REPO=epel tfhartmann/mrepo`
 
 Mirror repose and freeze/lock the CentOS repo
 `docker run -it --rm -e FROZEN=centos6-x86_64 -v /nfs/filesystem/repo:/mrepo tfhartmann/mrepo`
