@@ -2,11 +2,15 @@
 
 : ${UPDATE:=True}
 : ${WEB}
-
+: ${REPO}
 
 # Step1 Update the Repos - Defaults to 'True'
 if [ ${UPDATE} == 'True' ]; then
+  if [ -n ${REPO} ]; then
+    /usr/bin/mrepo -gu -r ${REPO}
+  else
     /usr/bin/mrepo -gu
+  fi
 fi
 
 # Create frozen repos
