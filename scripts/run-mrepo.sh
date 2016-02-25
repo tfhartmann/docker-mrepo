@@ -3,14 +3,23 @@
 : ${UPDATE:=True}
 : ${WEB}
 : ${REPO}
+: ${DIST}
+: ${VERBOSE:=False}
 
 # Step1 Update the Repos - Defaults to 'True'
 if [ ${UPDATE} == 'True' ]; then
-  if [ ! -z ${REPO} ]; then
-    /usr/bin/mrepo -gu -r ${REPO}
-  else
-    /usr/bin/mrepo -gu
+  mrepo_cmd='/usr/bin/mrepo -gu'
+  if [ ${VERBOSE} != 'False' ]; then
+    mrepo_cmd+=' -vvv'
   fi
+  if [ ! -z ${REPO} ]; then
+    mrepo_cmd+=" -r ${REPO}"
+  fi
+  if [ ! -z ${DIST} ]; then
+    mrepo_cmd+=" ${DIST}"
+  fi
+#  echo $mrepo_cmd
+  eval ${mrepo_cmd}
 fi
 
 # Create frozen repos
