@@ -55,3 +55,9 @@ The value of the frozen variable would be `centos6-x86_64`
 
 ### `UPDATE`
 UPDATE defaults to the string "True" and causes mrepo to run with the -guv argument.  It can be passed as *anything* other then true if you want to run this container, but do *not* want to updated your configured mirrors.
+
+### `DIST`
+Name of the dist to update, defaults to empty, so all dists are updated.
+
+### `VERBOSE`
+Cranks up verbosity of mrepo so you can see what its doing
