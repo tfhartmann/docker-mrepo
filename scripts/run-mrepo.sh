@@ -39,6 +39,8 @@ fi
 
 # run that web server!
 if [ ${WEB} ]; then
+    #Run mrepo, without updates/generation, to mount iso(s)
+    /usr/bin/mrepo -v
     rm -rf /var/run/httpd/* /tmp/httpd*
     echo 'Starting Apache...'
     exec /usr/sbin/apachectl -D FOREGROUND
