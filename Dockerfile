@@ -3,8 +3,9 @@ FROM centos:centos6
 MAINTAINER Tim Hartmann <tfhartmann@gmail.com>
 
 RUN yum install epel-release -y && \
-    yum install http://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm -y
-RUN yum install -y puppet \
+    yum install http://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm -y && \
+    yum install http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm -y && \
+    yum install -y puppet \
     apt-mirror \
     tar \
     hardlink \
@@ -13,7 +14,10 @@ RUN yum install -y puppet \
     unzip \
     rsync \
     python-pip \
-    fuse
+    fuse \ 
+    fuse-iso && \
+    yum clean all
+
 
 RUN mkdir -p /etc/mrepo.conf.d
 RUN mkdir -p /mrepo/www
