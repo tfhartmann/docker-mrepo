@@ -12,7 +12,8 @@ RUN yum install -y puppet \
     wget \
     unzip \
     rsync \
-    python-pip
+    python-pip \
+    fuse
 
 RUN mkdir -p /etc/mrepo.conf.d
 RUN mkdir -p /mrepo/www
