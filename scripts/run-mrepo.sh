@@ -45,3 +45,8 @@ if [ ${WEB} ]; then
     echo 'Starting Apache...'
     exec /usr/sbin/apachectl -D FOREGROUND
 fi
+
+#if we made it this far, we're exiting (mrepo finished its update, or apache exited)
+#so lets unmount any isos mrepo had mounted as to not eat all the /dev/loop devices
+/usr/bin/mrepo --unmount -vvv 
+
