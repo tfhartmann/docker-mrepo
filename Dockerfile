@@ -15,6 +15,7 @@ RUN yum install epel-release -y && \
     rsync \
     python-pip \
     fuse \ 
+    yum-utils \ 
     fuse-iso && \
     yum clean all
 
